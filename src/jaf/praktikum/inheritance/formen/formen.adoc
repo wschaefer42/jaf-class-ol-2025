@@ -1,0 +1,54 @@
+= Formen
+
+== Design
+
+[plantuml]
+----
+@startuml
+!theme reddress-darkblue
+hide empty attribute
+hide empty method
+!procedure $init_class($name)
+  class "$name.py" as $name << (F,orchid) >> ##[dotted]
+!endprocedure
+
+class Shape {
+    +{abstract}area(): double
+    +{abstract}perimeter(): double
+}
+
+class Ellipse
+class Circle
+class Rectangle
+class RoundedRectangle
+class Triangle
+class RectangularTriangle
+
+Ellipse --|> Shape
+Circle --|> Ellipse
+Rectangle --|> Shape
+RoundedRectangle --|> Rectangle
+Triangle --|> Shape
+RectangularTriangle --|> Triangle
+
+class Graphics {
+    +drawAll(shapes:Shape[])
+}
+
+Graphics .u.> Shape
+
+interface SurfaceArea {
+    +area(): double
+    +isEmpty(): boolean
+}
+
+Shape ..|> SurfaceArea
+
+class StickFigure {
+    -shapes:Shape[]
+}
+
+StickFigure ..|> SurfaceArea
+
+@enduml
+----
